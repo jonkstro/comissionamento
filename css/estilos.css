@@ -1,0 +1,59 @@
+.cabecalho {
+	font-size:18px;
+	padding:20px 1em;
+	background: #33CCCC;
+    width: auto;
+    text-align: Center;
+    margin: 1px;
+    color: #FFFFFF;
+    background-size: cover;
+    background-repeat: repeat;
+    background-position: 50% 50%;
+    border-radius: 4px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 8px;
+    border: 0px solid #00FF66;
+    background-size: cover;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgb(0 0 0 / 30%);
+    background-position: 50% 50%;
+}
+
+.cabecalho h1{
+	display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+.formulario {
+	padding: 20px 1em;
+	background-color: whitesmoke;
+	border-radius: 4px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 8px;
+    border: 0px solid #00FF66;
+    background-size: cover;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgb(0 0 0 / 30%);
+    background-position: 50% 50%;
+}
+
+.form-row {
+	justify-content: space-around;
+}
+
+.calculado .form-control {
+	color: #ED2424;
+	background-color: #FBFB80;
+}
+
+.input_comentarios {
+    padding-right:20px; 
+    padding-left: 20px;
+}

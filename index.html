@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!-- Estilo customizado -->
+    <link rel="stylesheet" type="text/css" href="css/estilos.css">
+    
+  <title>Comissionamento - Automação</title>
+</head>
+<body>
+<!-- ******************** Sobrecorrente Instatânea de Fase (50ABC) ******************** -->
+  <div class="col-md-12 formulario">
+  <form action="" method="POST">
+    
+    <div class="cabecalho">
+      <h1>Sobrecorrente Instatânea de Fase (50ABC)</h1>
+    </div>
+    <br>
+    
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label for="input_fase_50ABC">Fase:</label>
+        <select id="input_fase_50ABC" class="form-control" name="input_fase_50ABC">
+          <option selected value="1">A-B</option>
+          <option value="2">B-C</option>
+        </select>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="input_corrente_ajuste_50ABC">Corrente do Ajuste: </label>
+        <input type="number" class="form-control" id="input_corrente_ajuste_50ABC" placeholder="Corrente do ajuste (A)" name="input_corrente_ajuste_50ABC" onkeyup="mostrarCorrente50ABC(this.value)">
+      </div>
+      <div class="form-group col-md-3">
+        <label for="input_tempo_ajuste_50ABC">Tempo de Ajuste (Ciclos): </label>
+        <input type="number" class="form-control" id="input_tempo_ajuste_50ABC" placeholder="Tempo do ajuste (1 a 4)" name="input_tempo_ajuste_50ABC" onkeyup="mostrarTempo50ABC(this.value)">
+      </div>
+    </div>
+    <hr>
+    <div class="form-row">
+      <!-- corrente calculada pra JS -->
+      <div class="form-group col-md-4 calculado">
+        <label for="input_corrente_calculada_50ABC">Corrente calculada: </label>
+        <input type="number" class="form-control" id="input_corrente_calculada_50ABC" placeholder="Corrente calculada (1,15 * I)" name="input_corrente_calculada_50ABC" maxlength="8">
+      </div>
+
+      <!-- tempo calculado pra JS -->
+      <div class="form-group col-md-4 calculado">
+        <label for="input_tempo_calculado_50ABC">Tempo calculado: </label>
+        <input type="number" class="form-control" id="input_tempo_calculado_50ABC" placeholder="Tempo calculado (Ciclos / 60)" name="input_tempo_calculado_50ABC" maxlength="8">
+      </div>
+    </div>
+    <hr>
+    <div class="form-row">
+      <div class="form-group col-md-3">
+          <label for="input_tempo_inicial_50ABC">Tempo inicial (hh:mm:ss,ms): </label>
+          <input type="time" class="form-control" id="input_tempo_inicial_50ABC" name="input_tempo_inicial_50ABC">
+      </div>
+      <div class="form-group col-md-3">
+        <label for="input_tempo_final_50ABC">Tempo final (hh:mm:ss,ms): </label>
+        <input type="time" class="form-control" id="input_tempo_final_50ABC" name="input_tempo_final_50ABC">
+      </div>
+      <div class="form-group col-md-2">
+          <label for="input_tempo_real_50ABC">Tempo Real (s): </label>
+          <input type="number" class="form-control" id="input_tempo_real_50ABC" placeholder="Tempo real (s)" name="input_tempo_real_50ABC">
+      </div>
+      <div class="form-group col-md-2 calculado">
+          <label for="input_erro_50ABC">Erro: </label>
+          <input type="number" class="form-control" id="input_erro_50ABC" placeholder="Erro" name="input_erro_50ABC">
+      </div>
+    </div>
+
+    <!-- resultados dos disparos -->
+    <div class="form-row">
+
+      <div class="form-group col-md-2">
+        <label for="input_disparo_50ABC">Disparo 50ABC:</label>
+        <select id="input_disparo_50ABC" class="form-control" name="input_disparo_50ABC">
+          <option selected value="">Selecione...</option>
+          <option value="1">OK</option>
+          <option value="2">NÃO OK</option>
+          <option value="3">NÃO TESTADO</option>
+          <option value="4">NÃO SE APLICA</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="input_religamento_79_desbloqueado_50ABC">Religamento (79) Desbloqueado:</label> 
+        <select id="input_religamento_79_desbloqueado_50ABC" class="form-control" name="input_religamento_79_desbloqueado_50ABC">
+          <option selected value="">Selecione...</option>
+          <option value="1">OK</option>
+          <option value="2">NÃO OK</option>
+          <option value="3">NÃO TESTADO</option>
+          <option value="4">NÃO SE APLICA</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="input_religamento_79_bloqueado_50ABC">Religamento (79) Bloqueado:</label>
+        <select id="input_religamento_79_bloqueado_50ABC" class="form-control" name="input_religamento_79_bloqueado_50ABC">
+          <option selected value="">Selecione...</option>
+          <option value="1">OK</option>
+          <option value="2">NÃO OK</option>
+          <option value="3">NÃO TESTADO</option>
+          <option value="4">NÃO SE APLICA</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-2">
+        <label for="input_rl_remoto_50ABC">Chave L/R Remoto:</label>
+        <select id="input_rl_remoto_50ABC" class="form-control" name="input_rl_remoto_50ABC">
+          <option selected value="">Selecione...</option>
+          <option value="1">OK</option>
+          <option value="2">NÃO OK</option>
+          <option value="3">NÃO TESTADO</option>
+          <option value="4">NÃO SE APLICA</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-2">
+        <label for="input_rl_local_50ABC">Chave L/R Local:</label>
+        <select id="input_rl_local_50ABC" class="form-control" name="input_rl_local_50ABC">
+          <option selected value="">Selecione...</option>
+          <option value="1">OK</option>
+          <option value="2">NÃO OK</option>
+          <option value="3">NÃO TESTADO</option>
+          <option value="4">NÃO SE APLICA</option>
+        </select>
+      </div>
+
+      <p style="color: red;">
+        ESTE TESTE DEVE SER FEITO COM O RELIGAMENTO (79) DESBLOQUEADO. O DISJUNTOR DEVE ABRIR APÓS A INJEÇÃO DE CORRENTE PORÉM NÃO DEVE RELIGAR. NA CEMAR DEPENDE DA OA. EXECUTAR CONFORME A MESMA.
+      </p>
+    </div>
+
+
+  <!-- ******************** Sobrecorrente Temporizado de Fase (51ABC) ******************** -->
+
+    <div class="cabecalho">
+      <h1>Sobrecorrente Temporizado de Fase (51ABC)</h1>
+    </div>
+    <br>
+
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label for="input_fase_51ABC">Fase:</label>
+        <select id="input_fase_51ABC" class="form-control" name="input_fase_51ABC">
+          <option selected value="1">A-B</option>
+          <option value="2">B-C</option>
+        </select>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="input_corrente_ajuste_51ABC">Corrente do Ajuste: </label>
+        <input type="number" class="form-control" id="input_corrente_ajuste_51ABC" placeholder="Corrente do ajuste (A)" name="input_corrente_ajuste_51ABC" onkeyup="mostrarCorrente51ABC(this.value)" onchange="mostrarTempo51ABC()">
+      </div>
+      <div class="form-group col-md-2">
+        <label for="input_curva_51ABC">Curva:</label>
+        <select id="input_curva_51ABC" class="form-control", name="input_curva_51ABC" onchange="getCurva51ABC()">
+          <option selected value="">Selecione...</option>
+          <option value="1">C1</option>
+          <option value="2">C2</option>
+          <option value="3">C3</option>
+          <option value="4">C4</option>
+          <option value="5">C5</option>
+          <option value="6">U1</option>
+          <option value="7">U2</option>
+          <option value="8">U3</option>
+          <option value="9">U4</option>
+          <option value="10">U5</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-2">
+        <label for="input_time_dial_51ABC">Time Dial: </label>
+        <input type="number" class="form-control" id="input_time_dial_51ABC" placeholder="Time Dial" name="input_time_dial_51ABC" onkeyup ="getTempo51ABC()" onchange="mostrarTempo51ABC()">
+      </div>
+
+
+      <div class="form-group col-md-2">
+        <label for="input_corrente_real_51ABC">Corrente Real: </label>
+        <input type="number" class="form-control" id="input_corrente_real_51ABC" placeholder="Corrente Real (A)" name="input_corrente_real_51ABC" onchange="mostrarTempo51ABC()">
+      </div>
+    </div>
+    <hr>
+    <div class="form-row">
+      <!-- corrente calculada -->
+      <div class="form-group col-md-4 calculado">
+        <label for="input_corrente_calculada_51ABC">Corrente calculada: </label>
+        <input type="number" class="form-control" id="input_corrente_calculada_51ABC" placeholder="Corrente calculada (1,15 * I)" name="input_corrente_calculada_51ABC" maxlength="8">
+      </div>
+
+      <!-- tempo calculado -->
+      <div class="form-group col-md-4 calculado">
+        <label for="input_tempo_calculado_51ABC">Tempo calculado: </label>
+        <input type="number" class="form-control" id="input_tempo_calculado_51ABC" placeholder="Tempo calculado (Ciclos / 60)" name="input_tempo_calculado_51ABC" maxlength="8">
+      </div>
+    </div>
+    <hr>
+    <div class="form-row">
+      <div class="form-group col-md-3">
+          <label for="input_tempo_inicial_51ABC">Tempo inicial (hh:mm:ss,ms): </label>
+          <input type="time" class="form-control" id="input_tempo_inicial_51ABC" name="input_tempo_inicial_51ABC">
+      </div>
+      <div class="form-group col-md-3">
+        <label for="input_tempo_final_51ABC">Tempo final (hh:mm:ss,ms): </label>
+        <input type="time" class="form-control" id="input_tempo_final_51ABC" name="input_tempo_final_51ABC">
+      </div>
+      <div class="form-group col-md-2">
+          <label for="input_tempo_real_51ABC">Tempo Real (s): </label>
+          <input type="number" class="form-control" id="input_tempo_real_51ABC" placeholder="Tempo real (s)" name="input_tempo_real_51ABC">
+      </div>
+      <div class="form-group col-md-2 calculado">
+          <label for="input_erro_51ABC">Erro: </label>
+          <input type="number" class="form-control " id="input_erro_51ABC" placeholder="Erro" name="input_erro_51ABC">
+      </div>
+    </div>
+
+
+    <!-- resultados dos disparos -->
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label for="input_disparo_51ABC">Disparo 51ABC:</label>
+        <select id="input_disparo_51ABC" class="form-control" name="input_disparo_51ABC">
+          <option selected value="">Selecione...</option>
+          <option value="1">OK</option>
+          <option value="2">NÃO OK</option>
+          <option value="3">NÃO TESTADO</option>
+          <option value="4">NÃO SE APLICA</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="input_N_bloqueado_51ABC">Neutro (N) Bloqueado:</label>
+        <select id="input_N_bloqueado_51ABC" class="form-control" name="input_N_bloqueado_51ABC">
+          <option selected value="">Selecione...</option>
+          <option value="1">OK</option>
+          <option value="2">NÃO OK</option>
+          <option value="3">NÃO TESTADO</option>
+          <option value="4">NÃO SE APLICA</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-2">
+        <label for="input_trip_51ABC">TRIP (Comando):</label>
+        <select id="input_trip_51ABC" class="form-control" name="input_trip_51ABC">
+          <option selected value="">Selecione...</option>
+          <option value="1">OK</option>
+          <option value="2">NÃO OK</option>
+          <option value="3">NÃO TESTADO</option>
+          <option value="4">NÃO SE APLICA</option>
+        </select>
+      </div>
+
+      <!-- <p style="color: red;">
+       
+      </p> -->
+    </div>
+<!-- ******************** Sobrecorrente Temporizado de Fase (50G) ******************** -->
+
+    <div class="cabecalho">
+      <h1>Sobrecorrente Instatânea de Fase (50G)</h1>
+    </div>
+    <br>
+    
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label for="input_fase_50G">Fase:</label>
+        <select id="input_fase_50G" class="form-control" name="input_fase_50G">
+          <option selected value="1">CG</option>
+        </select>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="input_corrente_ajuste_50G">Corrente do Ajuste: </label>
+        <input type="number" class="form-control" id="input_corrente_ajuste_50G" placeholder="Corrente do ajuste (A)" name="input_corrente_ajuste_50G" onkeyup="mostrarCorrente50G(this.value)">
+      </div>
+      <div class="form-group col-md-3">
+        <label for="input_tempo_ajuste_50G">Tempo de Ajuste (Ciclos): </label>
+        <input type="number" class="form-control" id="input_tempo_ajuste_50G" placeholder="Tempo do ajuste (1 a 4)" name="input_tempo_ajuste_50G" onkeyup="mostrarTempo50G(this.value)">
+      </div>
+    </div>
+    <hr>
+    <div class="form-row">
+      <!-- corrente calculada pra JS -->
+      <div class="form-group col-md-4 calculado">
+        <label for="input_corrente_calculada_50G">Corrente calculada: </label>
+        <input type="number" class="form-control" id="input_corrente_calculada_50G" placeholder="Corrente calculada (1,15 * I)" name="input_corrente_calculada_50G" maxlength="8">
+      </div>
+
+      <!-- tempo calculado pra JS -->
+      <div class="form-group col-md-4 calculado">
+        <label for="input_tempo_calculado_50G">Tempo calculado: </label>
+        <input type="number" class="form-control" id="input_tempo_calculado_50G" placeholder="Tempo calculado (Ciclos / 60)" name="input_tempo_calculado_50G" maxlength="8">
+      </div>
+    </div>
+    <hr>
+    <div class="form-row">
+      <div class="form-group col-md-3">
+          <label for="input_tempo_inicial_50G">Tempo inicial (hh:mm:ss,ms): </label>
+          <input type="time" class="form-control" id="input_tempo_inicial_50G" name="input_tempo_inicial_50G">
+      </div>
+      <div class="form-group col-md-3">
+        <label for="input_tempo_final_50G">Tempo final (hh:mm:ss,ms): </label>
+        <input type="time" class="form-control" id="input_tempo_final_50G" name="input_tempo_final_50G">
+      </div>
+      <div class="form-group col-md-2">
+          <label for="input_tempo_real_50G">Tempo Real (s): </label>
+          <input type="number" class="form-control" id="input_tempo_real_50G" placeholder="Tempo real (s)" name="input_tempo_real_50G">
+      </div>
+      <div class="form-group col-md-2 calculado">
+          <label for="input_erro_50G">Erro: </label>
+          <input type="number" class="form-control " id="input_erro_50G" placeholder="Erro" name="input_erro_50G">
+      </div>
+    </div>
+    <div class="form-group input_comentarios">
+      <label for="input_comentarios_50G">Example textarea</label>
+      <textarea class="form-control" id="input_comentarios_50G" rows="2" name="input_comentarios_50G"></textarea>
+    </div>
+
+
+  <!-- resultado dos disparos -->
+    <div class="form-row">
+      <div class="form-group col-md-3">
+          <label for="input_disparo_50G">Disparo 50N:</label>
+          <select id="input_disparo_50G" class="form-control" name="input_disparo_50G">
+            <option selected value="">Selecione...</option>
+            <option value="1">OK</option>
+            <option value="2">NÃO OK</option>
+            <option value="3">NÃO TESTADO</option>
+            <option value="4">NÃO SE APLICA</option>
+          </select>
+        </div>
+
+        <div class="form-group col-md-2">
+          <label for="input_N_bloqueado_50G">Neutro (N) Bloqueado:</label>
+          <select id="input_N_bloqueado_50G" class="form-control" name="input_N_bloqueado_50G">
+            <option selected value="">Selecione...</option>
+            <option value="1">OK</option>
+            <option value="2">NÃO OK</option>
+            <option value="3">NÃO TESTADO</option>
+            <option value="4">NÃO SE APLICA</option>
+          </select>
+        </div>
+        <p style="color: red;">
+        ESTE TESTE DEVE SER FEITO COM O RELIGAMENTO (79) DESBLOQUEADO. O DISJUNTOR DEVE ABRIR APÓS A INJEÇÃO DE CORRENTE, PORÉM NÃO DEVE RELIGAR.
+      </p>
+    </div>
+
+
+<!-- ******************** Sobrecorrente Temporizado de Fase (51G) ******************** -->
+
+    <div class="cabecalho">
+      <h1>Sobrecorrente Temporizado de Fase (51N)</h1>
+    </div>
+    <br>
+
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label for="input_fase_51G">Fase:</label>
+        <select id="input_fase_51G" class="form-control" name="input_fase_51G">
+          <option selected value="1">A-B</option>
+          <option value="2">B-C</option>
+        </select>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="input_corrente_ajuste_51G">Corrente do Ajuste: </label>
+        <input type="number" class="form-control" id="input_corrente_ajuste_51G" placeholder="Corrente do ajuste (A)" name="input_corrente_ajuste_51G" onkeyup="mostrarCorrente51G(this.value)" onchange="mostrarTempo51G()">
+      </div>
+      <div class="form-group col-md-2">
+        <label for="input_curva_51G">Curva:</label>
+        <select id="input_curva_51G" class="form-control", name="input_curva_51G" onchange="getCurva51G()">
+          <option selected value="">Selecione...</option>
+          <option value="1">C1</option>
+          <option value="2">C2</option>
+          <option value="3">C3</option>
+          <option value="4">C4</option>
+          <option value="5">C5</option>
+          <option value="6">U1</option>
+          <option value="7">U2</option>
+          <option value="8">U3</option>
+          <option value="9">U4</option>
+          <option value="10">U5</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-2">
+        <label for="input_time_dial_51G">Time Dial: </label>
+        <input type="number" class="form-control" id="input_time_dial_51G" placeholder="Time Dial" name="input_time_dial_51G" onkeyup ="getTempo51ABC()" onchange="mostrarTempo51G()">
+      </div>
+
+
+      <div class="form-group col-md-2">
+        <label for="input_corrente_real_51G">Corrente Real: </label>
+        <input type="number" class="form-control" id="input_corrente_real_51G" placeholder="Corrente Real (A)" name="input_corrente_real_51G" onchange="mostrarTempo51G()">
+      </div>
+    </div>
+    <hr>
+    <div class="form-row">
+      <!-- corrente calculada -->
+      <div class="form-group col-md-4 calculado">
+        <label for="input_corrente_calculada_51G">Corrente calculada: </label>
+        <input type="number" class="form-control" id="input_corrente_calculada_51G" placeholder="Corrente calculada (1,15 * I)" name="input_corrente_calculada_51G" maxlength="8">
+      </div>
+
+      <!-- tempo calculado -->
+      <div class="form-group col-md-4 calculado">
+        <label for="input_tempo_calculado_51G">Tempo calculado: </label>
+        <input type="number" class="form-control" id="input_tempo_calculado_51G" placeholder="Tempo calculado (Ciclos / 60)" name="input_tempo_calculado_51G" maxlength="8">
+      </div>
+    </div>
+    <hr>
+    <div class="form-row">
+      <div class="form-group col-md-3">
+          <label for="input_tempo_inicial_51G">Tempo inicial (hh:mm:ss,ms): </label>
+          <input type="time" class="form-control" id="input_tempo_inicial_51G" name="input_tempo_inicial_51G">
+      </div>
+      <div class="form-group col-md-3">
+        <label for="input_tempo_final_51G">Tempo final (hh:mm:ss,ms): </label>
+        <input type="time" class="form-control" id="input_tempo_final_51G" name="input_tempo_final_51G">
+      </div>
+      <div class="form-group col-md-2">
+          <label for="input_tempo_real_51G">Tempo Real (s): </label>
+          <input type="number" class="form-control" id="input_tempo_real_51G" placeholder="Tempo real (s)" name="input_tempo_real_51G">
+      </div>
+      <div class="form-group col-md-2 calculado">
+          <label for="input_erro_51G">Erro: </label>
+          <input type="number" class="form-control " id="input_erro_51G" placeholder="Erro" name="input_erro_51G">
+      </div>
+    </div>
+
+
+
+    <!-- resultados dos disparos -->
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label for="input_disparo_51G">Disparo 51N:</label>
+        <select id="input_disparo_51G" class="form-control" name="input_disparo_51G">
+          <option selected value="">Selecione...</option>
+          <option value="1">OK</option>
+          <option value="2">NÃO OK</option>
+          <option value="3">NÃO TESTADO</option>
+          <option value="4">NÃO SE APLICA</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="input_estado_51G">Estado do Disjuntor/Religador:</label>
+        <select id="input_estado_51G" class="form-control" name="input_estado_51G">
+          <option selected value="">Selecione...</option>
+          <option value="1">OK</option>
+          <option value="2">NÃO OK</option>
+          <option value="3">NÃO TESTADO</option>
+          <option value="4">NÃO SE APLICA</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-2">
+        <label for="input_close_51G">CLOSE (Comando):</label>
+        <select id="input_close_51G" class="form-control" name="input_close_51G">
+          <option selected value="">Selecione...</option>
+          <option value="1">OK</option>
+          <option value="2">NÃO OK</option>
+          <option value="3">NÃO TESTADO</option>
+          <option value="4">NÃO SE APLICA</option>
+        </select>
+      </div>
+
+      <p style="color: red;">
+       CASO O EQUIPAMENTO TENHA A FUNÇÃO (79) HABILITADA DEVE-SE APROVEITAR ESTE PARA REALIZAR O TESTE DE RELIGAMENTO.  PREENCHER CAMPOS DOS TEMPOS ABAIXO.
+      </p>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+  </form>  
+  </div>
+ 
+
+
+
+
+
+<!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+<script src="js/index.js" type="text/javascript"></script>
+
+
+<!-- JS pego do site do alves -->
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+<script src="/include/form/form8.js?6518733404760"></script>
+ -->
+</body>
+
+
+</html>
