@@ -48,32 +48,32 @@
       <!-- corrente calculada pra JS -->
       <div class="form-group col-md-4 calculado">
         <label for="input_corrente_calculada_50ABC">Corrente calculada: </label>
-        <input type="number" class="form-control" id="input_corrente_calculada_50ABC" placeholder="Corrente calculada (1,15 * I)" name="input_corrente_calculada_50ABC" maxlength="8">
+        <input type="number" class="form-control" id="input_corrente_calculada_50ABC" placeholder="Corrente calculada (1,15 * I)" name="input_corrente_calculada_50ABC" maxlength="8" readonly>
       </div>
 
       <!-- tempo calculado pra JS -->
       <div class="form-group col-md-4 calculado">
         <label for="input_tempo_calculado_50ABC">Tempo calculado: </label>
-        <input type="number" class="form-control" id="input_tempo_calculado_50ABC" placeholder="Tempo calculado (Ciclos / 60)" name="input_tempo_calculado_50ABC" maxlength="8">
+        <input type="number" class="form-control" id="input_tempo_calculado_50ABC" placeholder="Tempo calculado (Ciclos / 60)" name="input_tempo_calculado_50ABC" maxlength="8" readonly>
       </div>
     </div>
     <hr>
     <div class="form-row">
       <div class="form-group col-md-3">
-          <label for="input_tempo_inicial_50ABC">Tempo inicial (hh:mm:ss,ms): </label>
-          <input type="time" class="form-control" id="input_tempo_inicial_50ABC" name="input_tempo_inicial_50ABC">
+        <label for="input_tempo_inicial_50ABC">Tempo inicial (hh:mm:ss,ms): </label>
+        <input type="text" placeholder="hh:mm:ss,ms" class="form-control" id="input_tempo_inicial_50ABC" name="input_tempo_inicial_50ABC" onkeyup="mostrarTempoReal50ABC()" onkeydown='mostrarErro50ABC()'>
       </div>
       <div class="form-group col-md-3">
         <label for="input_tempo_final_50ABC">Tempo final (hh:mm:ss,ms): </label>
-        <input type="time" class="form-control" id="input_tempo_final_50ABC" name="input_tempo_final_50ABC">
-      </div>
-      <div class="form-group col-md-2">
-          <label for="input_tempo_real_50ABC">Tempo Real (s): </label>
-          <input type="number" class="form-control" id="input_tempo_real_50ABC" placeholder="Tempo real (s)" name="input_tempo_real_50ABC">
+        <input type="text" placeholder="hh:mm:ss,ms" class="form-control" id="input_tempo_final_50ABC" name="input_tempo_final_50ABC" onkeyup="mostrarTempoReal50ABC()" onkeydown='mostrarErro50ABC()'>
       </div>
       <div class="form-group col-md-2 calculado">
-          <label for="input_erro_50ABC">Erro: </label>
-          <input type="number" class="form-control" id="input_erro_50ABC" placeholder="Erro" name="input_erro_50ABC">
+        <label for="input_tempo_real_50ABC">Tempo Real (s): </label>
+        <input type="text" class="form-control" id="input_tempo_real_50ABC" placeholder="Tempo real (s)" name="input_tempo_real_50ABC" onkeyup='mostrarErro50ABC()' readonly>
+      </div>
+      <div class="form-group col-md-2 calculado">
+        <label for="input_erro_50ABC">Erro: </label>
+        <input type="number" class="form-control" id="input_erro_50ABC" placeholder="Erro" name="input_erro_50ABC" readonly>
       </div>
     </div>
 
@@ -206,13 +206,13 @@
     <div class="form-row">
       <div class="form-group col-md-3">
           <label for="input_tempo_inicial_51ABC">Tempo inicial (hh:mm:ss,ms): </label>
-          <input type="time" class="form-control" id="input_tempo_inicial_51ABC" name="input_tempo_inicial_51ABC">
+          <input type="time" step="1" class="form-control" id="input_tempo_inicial_51ABC" name="input_tempo_inicial_51ABC">
       </div>
       <div class="form-group col-md-3">
         <label for="input_tempo_final_51ABC">Tempo final (hh:mm:ss,ms): </label>
-        <input type="time" class="form-control" id="input_tempo_final_51ABC" name="input_tempo_final_51ABC">
+        <input type="time" step="1" class="form-control" id="input_tempo_final_51ABC" name="input_tempo_final_51ABC">
       </div>
-      <div class="form-group col-md-2">
+      <div class="form-group col-md-2 calculado">
           <label for="input_tempo_real_51ABC">Tempo Real (s): </label>
           <input type="number" class="form-control" id="input_tempo_real_51ABC" placeholder="Tempo real (s)" name="input_tempo_real_51ABC">
       </div>
@@ -303,13 +303,13 @@
     <div class="form-row">
       <div class="form-group col-md-3">
           <label for="input_tempo_inicial_50G">Tempo inicial (hh:mm:ss,ms): </label>
-          <input type="time" class="form-control" id="input_tempo_inicial_50G" name="input_tempo_inicial_50G">
+          <input type="time" step="1" class="form-control" id="input_tempo_inicial_50G" name="input_tempo_inicial_50G">
       </div>
       <div class="form-group col-md-3">
         <label for="input_tempo_final_50G">Tempo final (hh:mm:ss,ms): </label>
-        <input type="time" class="form-control" id="input_tempo_final_50G" name="input_tempo_final_50G">
+        <input type="time" step="1" class="form-control" id="input_tempo_final_50G" name="input_tempo_final_50G">
       </div>
-      <div class="form-group col-md-2">
+      <div class="form-group col-md-2 calculado">
           <label for="input_tempo_real_50G">Tempo Real (s): </label>
           <input type="number" class="form-control" id="input_tempo_real_50G" placeholder="Tempo real (s)" name="input_tempo_real_50G">
       </div>
@@ -418,13 +418,13 @@
     <div class="form-row">
       <div class="form-group col-md-3">
           <label for="input_tempo_inicial_51G">Tempo inicial (hh:mm:ss,ms): </label>
-          <input type="time" class="form-control" id="input_tempo_inicial_51G" name="input_tempo_inicial_51G">
+          <input type="time" step="1" class="form-control" id="input_tempo_inicial_51G" name="input_tempo_inicial_51G">
       </div>
       <div class="form-group col-md-3">
         <label for="input_tempo_final_51G">Tempo final (hh:mm:ss,ms): </label>
-        <input type="time" class="form-control" id="input_tempo_final_51G" name="input_tempo_final_51G">
+        <input type="time" step="1" class="form-control" id="input_tempo_final_51G" name="input_tempo_final_51G">
       </div>
-      <div class="form-group col-md-2">
+      <div class="form-group col-md-2 calculado">
           <label for="input_tempo_real_51G">Tempo Real (s): </label>
           <input type="number" class="form-control" id="input_tempo_real_51G" placeholder="Tempo real (s)" name="input_tempo_real_51G">
       </div>

@@ -17,6 +17,63 @@ function mostrarTempo50ABC(valor){
     // console.log(valor);
 }
 
+// função para calcular o tempo real ([tempo final - tempo inicial] * 86400)
+function mostrarTempoReal50ABC(){
+	var caixaValor = document.getElementById('input_tempo_real_50ABC');
+	var tempoInicial = document.getElementById('input_tempo_inicial_50ABC').value.split(':');
+	var tempoFinal = document.getElementById('input_tempo_final_50ABC').value.split(':');
+
+
+	var hrInicial = parseInt(tempoInicial[0]);
+	var mmInicial = parseInt(tempoInicial[1]);
+	var ssInicial = parseFloat(tempoInicial[2].replace(',', '.')).toFixed(3);
+
+	var hrFinal = parseInt(tempoFinal[0]);
+	var mmFinal = parseInt(tempoFinal[1]);
+	var ssFinal = parseFloat(tempoFinal[2].replace(',', '.')).toFixed(3);
+	
+	var hrReal = (hrFinal - hrInicial);
+	var mmReal = (mmFinal  - mmInicial);
+	var ssReal = parseFloat(ssFinal - ssInicial).toFixed(3);
+
+	// if (hrReal < 10) {
+	// 	hrCaixa = '0'+hrReal;
+	// } else {
+	// 	hrCaixa = hrReal;
+	// }
+
+	// if (mmReal < 10) {
+	// 	mmCaixa = '0'+mmReal;
+	// } else {
+	// 	mmCaixa = mmReal;
+	// }
+
+	// if (ssReal < 10){
+	// 	ssCaixa = '0'+ssReal;
+	// } else {
+	// 	ssCaixa = ssReal;
+	// }
+
+	caixaValor.value = ((hrReal * 3600) + (mmReal * 60) + ssReal.replace('.', ','));
+
+
+
+	// var diferenca = tempoFinal - tempoInicial;
+	// console.log(diferenca);
+}
+
+
+// função para calcular o erro entre os tempos
+function mostrarErro50ABC(){
+	caixaValor = document.getElementById('input_erro_50ABC');
+	var tempoReal = parseFloat(document.getElementById('input_tempo_real_50ABC').value).toFixed(3);
+	var tempoCalculado = parseFloat(document.getElementById('input_tempo_calculado_50ABC').value).toFixed(3);
+
+	var erro = parseFloat(tempoReal - tempoCalculado).toFixed(3);
+	caixaValor.value = (erro);
+}
+
+
 // ******************** FUNÇÃO JS PROTEÇÃO 51 ABC ********************
 
 // função para mostrar o valor de corrente calculada 51 ABC
