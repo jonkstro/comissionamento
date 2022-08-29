@@ -24,42 +24,19 @@ function mostrarTempoReal50ABC(){
 	var tempoFinal = document.getElementById('input_tempo_final_50ABC').value.split(':');
 
 
-	var hrInicial = parseInt(tempoInicial[0]);
-	var mmInicial = parseInt(tempoInicial[1]);
-	var ssInicial = parseFloat(tempoInicial[2].replace(',', '.')).toFixed(3);
+	var hrInicial = (tempoInicial[0]);
+	var mmInicial = (tempoInicial[1]);
+	var ssInicial = (tempoInicial[2].replace(',', '.'));
 
-	var hrFinal = parseInt(tempoFinal[0]);
-	var mmFinal = parseInt(tempoFinal[1]);
-	var ssFinal = parseFloat(tempoFinal[2].replace(',', '.')).toFixed(3);
+	var hrFinal = (tempoFinal[0]);
+	var mmFinal = (tempoFinal[1]);
+	var ssFinal = (tempoFinal[2].replace(',', '.'));
 	
-	var hrReal = (hrFinal - hrInicial);
-	var mmReal = (mmFinal  - mmInicial);
-	var ssReal = parseFloat(ssFinal - ssInicial).toFixed(3);
+	var tempoInicial = convHoraToSegundo(hrInicial, mmInicial, ssInicial);
+	var tempoFinal = convHoraToSegundo(hrFinal, mmFinal, ssFinal);
 
-	// if (hrReal < 10) {
-	// 	hrCaixa = '0'+hrReal;
-	// } else {
-	// 	hrCaixa = hrReal;
-	// }
-
-	// if (mmReal < 10) {
-	// 	mmCaixa = '0'+mmReal;
-	// } else {
-	// 	mmCaixa = mmReal;
-	// }
-
-	// if (ssReal < 10){
-	// 	ssCaixa = '0'+ssReal;
-	// } else {
-	// 	ssCaixa = ssReal;
-	// }
-
-	caixaValor.value = ((hrReal * 3600) + (mmReal * 60) + ssReal.replace('.', ','));
-
-
-
-	// var diferenca = tempoFinal - tempoInicial;
-	// console.log(diferenca);
+	caixaValor.value = parseFloat(tempoFinal - tempoInicial).toFixed(3);
+	
 }
 
 
@@ -69,8 +46,11 @@ function mostrarErro50ABC(){
 	var tempoReal = parseFloat(document.getElementById('input_tempo_real_50ABC').value).toFixed(3);
 	var tempoCalculado = parseFloat(document.getElementById('input_tempo_calculado_50ABC').value).toFixed(3);
 
-	var erro = parseFloat(tempoReal - tempoCalculado).toFixed(3);
-	caixaValor.value = (erro);
+	var erro = parseFloat((tempoReal - tempoCalculado) * 100).toFixed(2);
+	caixaValor.value = (erro + '%');
+	console.log(tempoReal);
+	console.log(tempoCalculado);
+	console.log(caixaValor.value)
 }
 
 
@@ -326,3 +306,15 @@ function mostrarTempo51G() {
 
 
 
+function convHoraToSegundo(hh, mm, ss){
+	var hora = hh;
+	var minuto = mm;
+	var segundo = ss;
+
+	var totalSegundos = (hora * 3600) + (minuto * 60) + (segundo * 1);
+	return totalSegundos;
+}
+
+function convSegundoToHora(){
+
+}

@@ -61,11 +61,11 @@
     <div class="form-row">
       <div class="form-group col-md-3">
         <label for="input_tempo_inicial_50ABC">Tempo inicial (hh:mm:ss,ms): </label>
-        <input type="text" placeholder="hh:mm:ss,ms" class="form-control" id="input_tempo_inicial_50ABC" name="input_tempo_inicial_50ABC" onkeyup="mostrarTempoReal50ABC()" onkeydown='mostrarErro50ABC()'>
+        <input type="text" placeholder="hh:mm:ss,ms" class="form-control" id="input_tempo_inicial_50ABC" name="input_tempo_inicial_50ABC" onkeyup="mostrarTempoReal50ABC()" >
       </div>
       <div class="form-group col-md-3">
         <label for="input_tempo_final_50ABC">Tempo final (hh:mm:ss,ms): </label>
-        <input type="text" placeholder="hh:mm:ss,ms" class="form-control" id="input_tempo_final_50ABC" name="input_tempo_final_50ABC" onkeyup="mostrarTempoReal50ABC()" onkeydown='mostrarErro50ABC()'>
+        <input type="text" placeholder="hh:mm:ss,ms" class="form-control" id="input_tempo_final_50ABC" name="input_tempo_final_50ABC" onkeyup="mostrarTempoReal50ABC()" onchange='mostrarErro50ABC()'>
       </div>
       <div class="form-group col-md-2 calculado">
         <label for="input_tempo_real_50ABC">Tempo Real (s): </label>
@@ -73,7 +73,7 @@
       </div>
       <div class="form-group col-md-2 calculado">
         <label for="input_erro_50ABC">Erro: </label>
-        <input type="number" class="form-control" id="input_erro_50ABC" placeholder="Erro" name="input_erro_50ABC" readonly>
+        <input type="text" class="form-control" id="input_erro_50ABC" placeholder="Erro" name="input_erro_50ABC" readonly>
       </div>
     </div>
 
